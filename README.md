@@ -1,7 +1,7 @@
 # Omnidroid · 3DS Edition
 
 <p align="center">
-  <img src="docs/assets/cover.png" alt="Omnidroid 3DS Edition cover" width="100%" />
+  <img src="docs/assets/cover.png?v=3" alt="Omnidroid 3DS Edition cover" width="100%" />
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@ It is a fork of [Omnidroid](https://github.com/Ahmed-Abousaif/Omnidroid) by Ahme
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/home_carousel.png" alt="3DS-style home carousel" width="100%" />
+  <img src="docs/screenshots/home_carousel.png?v=2" alt="3DS-style home carousel" width="100%" />
 </p>
 <p align="center">
   <em>The 3DS Home view: a horizontal game carousel — the centered tile scales up with a white border, and the game title appears beneath the row</em>
@@ -28,24 +28,24 @@ It is a fork of [Omnidroid](https://github.com/Ahmed-Abousaif/Omnidroid) by Ahme
 <table align="center" width="100%">
   <tr>
     <td width="50%" align="center" valign="middle">
-      <img src="docs/screenshots/library_grid.png" alt="Library grid view" width="100%" /><br />
+      <img src="docs/screenshots/library_grid.png?v=2" alt="Library grid view" width="100%" /><br />
       <b>Classic Grid View</b><br />
       <sub>Switch between 3DS Home, Grid and List at the tap of a button</sub>
     </td>
     <td width="50%" align="center" valign="middle">
-      <img src="docs/screenshots/console_management.png" alt="Console carousel" width="100%" /><br />
+      <img src="docs/screenshots/console_management.png?v=2" alt="Console carousel" width="100%" /><br />
       <b>Console Carousel</b><br />
       <sub>On-demand Libretro cores & database slice downloads</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" align="center" valign="middle">
-      <img src="docs/screenshots/settings.png" alt="Settings" width="100%" /><br />
+      <img src="docs/screenshots/settings.png?v=2" alt="Settings" width="100%" /><br />
       <b>Settings Hub</b><br />
       <sub>White rounded panels with pastel accents throughout</sub>
     </td>
     <td width="50%" align="center" valign="middle">
-      <img src="docs/screenshots/gamer_profile.png" alt="Gamer profile" width="100%" /><br />
+      <img src="docs/screenshots/gamer_profile.png?v=2" alt="Gamer profile" width="100%" /><br />
       <b>Gamer Profile & Stats</b><br />
       <sub>Play hours, daily streaks, XP leveling & session history</sub>
     </td>
