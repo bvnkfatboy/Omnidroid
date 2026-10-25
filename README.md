@@ -1,305 +1,135 @@
-# Omnidroid
+# Omnidroid · 3DS Edition
 
 <p align="center">
-  <a href="https://github.com/Ahmed-Abousaif/Omnidroid/releases"><img src="https://img.shields.io/github/v/release/Ahmed-Abousaif/Omnidroid?style=for-the-badge&logo=android&color=3DDC84" alt="Release"></a>
-  <a href="https://github.com/Ahmed-Abousaif/Omnidroid/stargazers"><img src="https://img.shields.io/github/stars/Ahmed-Abousaif/Omnidroid?style=for-the-badge&logo=github&color=FFD700" alt="Stars"></a>
-  <a href="https://github.com/Ahmed-Abousaif/Omnidroid/blob/master/COPYING"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge" alt="License: GPLv3"></a>
-  <a href="https://github.com/Ahmed-Abousaif/omni-libretrodroid"><img src="https://img.shields.io/badge/Graphics-Vulkan%20%7C%20OpenGL%20ES-E63946.svg?style=for-the-badge&logo=vulkan" alt="Vulkan Hardware Acceleration"></a>
+  <img src="docs/assets/cover.png" alt="Omnidroid 3DS Edition cover" width="100%" />
 </p>
 
 <p align="center">
-  <strong>Omnidroid</strong> is a modern, landscape-first, Libretro-powered multi-console emulation platform for Android. Forked from <a href="https://github.com/Swordfish90/Lemuroid">Lemuroid</a>, Omnidroid elevates mobile and handheld gaming with native <strong>Vulkan hardware acceleration</strong>, complete <strong>controller-first navigation</strong>, rich <strong>RAWG game metadata & trailers</strong>, multi-provider <strong>cloud saves</strong>, and a built-in <strong>gamer profile & XP progression system</strong> — all packaged into a lightweight release (&lt;8.5 MB APK).
+  <a href="https://github.com/bvnkfatboy/Omnidroid/releases"><img src="https://img.shields.io/github/v/release/bvnkfatboy/Omnidroid?style=for-the-badge&logo=android&color=3DDC84" alt="Release"></a>
+  <a href="https://github.com/bvnkfatboy/Omnidroid/stargazers"><img src="https://img.shields.io/github/stars/bvnkfatboy/Omnidroid?style=for-the-badge&logo=github&color=FFD700" alt="Stars"></a>
+  <a href="./COPYING"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge" alt="License: GPLv3"></a>
 </p>
 
-<p align="center">
-  <a href="#-support-omnidroid"><b>Support</b></a> •
-  <a href="#-screenshots"><b>Screenshots</b></a> •
-  <a href="#-for-players-getting-started"><b>For Players</b></a> •
-  <a href="#-supported-consoles--systems"><b>Supported Systems</b></a> •
-  <a href="#-features-deep-dive"><b>Features</b></a> •
-  <a href="#-for-contributors--developers"><b>For Contributors</b></a> •
-  <a href="#star-history"><b>Star History</b></a>
-</p>
+**Omnidroid 3DS Edition** is a Libretro-powered multi-console emulator for Android with a full **Nintendo 3DS HOME Menu–style interface**: a cream diagonal-striped background, a game carousel with springy white-bordered tiles, rounded pastel accents, a rounded typeface, and the classic top status bar with live clock, Wi-Fi and battery indicators.
 
----
-
-## ☕ Support Omnidroid
-
-If Omnidroid helps you play, you can fuel continued development here:
-
-<p align="center">
-  <a href="https://www.buymeacoffee.com/abousaif"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" /></a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://ko-fi.com/abousaif"><img src="https://storage.ko-fi.com/cdn/brandasset/v2/support_me_on_kofi_blue.png" alt="Support me on Ko-fi" height="48" /></a>
-</p>
+It is a fork of [Omnidroid](https://github.com/Ahmed-Abousaif/Omnidroid) by Ahmed Abousaif, which is itself a fork of [Lemuroid](https://github.com/Swordfish90/Lemuroid) by Filippo Scognamiglio — all GPLv3, all credit to them. ❤️
 
 ---
 
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/launcher_landscape.jpg" alt="Omnidroid Handheld Landscape Launcher" width="100%" />
+  <img src="docs/screenshots/home_carousel.png" alt="3DS-style home carousel" width="100%" />
 </p>
 <p align="center">
-  <em>Dedicated landscape launcher engineered for Android handheld consoles, tablets, TVs, and phones with full gamepad focus</em>
+  <em>The 3DS Home view: a horizontal game carousel — the centered tile scales up with a white border, and the game title appears beneath the row</em>
 </p>
 
 <table align="center" width="100%">
   <tr>
-    <td width="31.8%" rowspan="2" align="center" valign="middle">
-      <img src="docs/screenshots/library_grid_portrait.jpg" alt="Portrait Library Grid" width="100%" /><br />
-      <b>Portrait Library Grid</b><br />
-      <sub>Adaptive cover zoom slider, quick Continue & live search</sub>
+    <td width="50%" align="center" valign="middle">
+      <img src="docs/screenshots/library_grid.png" alt="Library grid view" width="100%" /><br />
+      <b>Classic Grid View</b><br />
+      <sub>Switch between 3DS Home, Grid and List at the tap of a button</sub>
     </td>
-    <td width="68.2%" align="center" valign="middle">
-      <img src="docs/screenshots/console_management.jpg" alt="Console Selection Carousel" width="100%" /><br />
+    <td width="50%" align="center" valign="middle">
+      <img src="docs/screenshots/console_management.png" alt="Console carousel" width="100%" /><br />
       <b>Console Carousel</b><br />
       <sub>On-demand Libretro cores & database slice downloads</sub>
     </td>
   </tr>
   <tr>
-    <td width="68.2%" align="center" valign="middle">
-      <img src="docs/screenshots/gamer_profile.jpg" alt="Gamer Profile & XP" width="100%" /><br />
+    <td width="50%" align="center" valign="middle">
+      <img src="docs/screenshots/settings.png" alt="Settings" width="100%" /><br />
+      <b>Settings Hub</b><br />
+      <sub>White rounded panels with pastel accents throughout</sub>
+    </td>
+    <td width="50%" align="center" valign="middle">
+      <img src="docs/screenshots/gamer_profile.png" alt="Gamer profile" width="100%" /><br />
       <b>Gamer Profile & Stats</b><br />
-      <sub>Track play hours, daily streaks, XP leveling & session history</sub>
+      <sub>Play hours, daily streaks, XP leveling & session history</sub>
     </td>
   </tr>
 </table>
 
 ---
 
-## ⚡ Highlights
+## ✨ What's New in the 3DS Edition
 
-- 🌋 **Native Vulkan & OpenGL ES Engine:** Powered by our custom [omni-libretrodroid](https://github.com/Ahmed-Abousaif/omni-libretrodroid) native C++ engine with per-system graphics API switching (Vulkan, GLES 2/3, Software) for rock-solid 60 FPS performance and reduced thermal throttling.
-- 🎮 **Controller-First Navigation:** Seamless navigation across the entire app (library, search, consoles, settings, game pages) using physical gamepads with focus glow and button hint bars.
-- 📱 **Handheld & Phone UI:** Fluid landscape and portrait modes with dedicated layouts for handhelds (Retroid, Odin, ANBERNIC), phones, tablets, and Android TV.
-- ☁️ **Multi-Cloud Save Sync:** Sync saves seamlessly with **Google Drive**, **Dropbox**, or **OneDrive**, with conflict resolution and offline zip export/import.
-- 🎨 **Rich RAWG Game Details:** Automatic cover art, descriptions, genres, release dates, publishers, ratings, and video trailers without scraping YouTube.
-- 🏆 **Gamification & Profile System:** Earn XP from play sessions, maintain daily streaks, level up, and unlock collection badges (Collector → Enthusiast → Historian → Omnidroid Master).
-- 📺 **Big-Screen & TV Casting:** Cast gameplay wirelessly or over HDMI directly to TVs and monitors.
-- 🔋 **Battery-Aware HD Mode:** Intelligently disables heavy HD enhancements when battery drops below 15% to conserve power.
-- 🛡️ **Lightweight & 16KB Page-Aligned:** Universal release APK is under 8.5 MB (~27% smaller than baseline) and fully aligned for Android 15+ 16KB memory page sizes.
+- 🕹️ **3DS Home view (default):** a horizontal game carousel with spring-physics scale/bounce animations, selection borders, chevron navigation, full gamepad and touch support. Grid and List views remain one tap away.
+- 🎨 **Classic 3DS light theme:** warm cream surfaces with a faint diagonal hatch, pastel green accents, rounded chips and white tiles across every screen — library, game details, settings, profile and the in-game menu.
+- 🔤 **Rounded typography:** the whole app is set in [Nunito](https://fonts.google.com/specimen/Nunito) (OFL), echoing the friendly 3DS system font.
+- 🧭 **Faithful top bar:** live clock, Wi-Fi, battery and controller indicators — the 3DS status row, already loved by Omnidroid users, now on a light canvas.
 
----
-
-## 🎮 For Players: Getting Started
-
-### 1. Installation
-
-Download the latest APK from the [Releases](https://github.com/Ahmed-Abousaif/Omnidroid/releases) page and install it on your Android device (Android 7.0+ / API 24+ required).
-
-### 2. Adding ROMs
-
-1. Launch Omnidroid and grant storage permissions when prompted.
-2. Select the directory where your game ROMs are stored.
-3. Omnidroid's **content-based ROM scanner** automatically identifies your games from file headers (no strict folder structure required).
-4. Supported compression formats include `.zip`, `.7z`, and `.chd`.
-
-### 3. BIOS Requirements
-
-Most retro consoles run immediately without external BIOS files. For systems that require BIOS dumps:
-
-- **PlayStation 2 (ARMSX2):** Compatible with USA, Europe, and Japan BIOS images.
-- Other BIOS files (e.g., PS1, Sega CD, GBA) can be placed in the standard Libretro system folder.
-
-### 4. Controller Setup
-
-- **Physical Gamepads:** Plug in via USB or pair via Bluetooth (Xbox, PlayStation DualShock/DualSense, Nintendo Switch Pro, 8BitDo, and integrated handheld controls). Key mappings are applied automatically.
-- **Touch Controls:** On-screen virtual pads can be customized for size, position, opacity, and 4-way vs. 8-way D-Pad modes. Retro systems support routing the virtual analog stick to D-Pad inputs.
-
-### 5. Cloud Saves Setup
-
-Under **Settings → Saves**, log into **Google Drive**, **Dropbox**, or **OneDrive** to enable automatic cloud backup and cross-device sync. You can also export or import a local `.zip` backup of all your saves anytime.
-
----
+Everything else from Omnidroid is intact: Vulkan/GLES rendering, controller-first navigation, cloud saves, RAWG metadata, gamer profiles, and 20+ supported systems.
 
 ## 🕹️ Supported Consoles & Systems
 
-Omnidroid supports a massive range of retro and modern consoles powered by Libretro cores:
+| System                             | Console / Generation     | Emulation Core                                                                                                                                       |
+| :--------------------------------- | :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Nintendo 3DS**                   | Handheld (8th Gen)       | [Azahar](https://github.com/azahar-emu/azahar) / [Citra](https://docs.libretro.com/library/citra/)                                                   |
+| **Nintendo Wii U** _(Beta)_        | Home Console (8th Gen)   | [Cemu](https://github.com/cemu-project/Cemu)                                                                                                         |
+| **Nintendo Wii** _(Beta)_          | Home Console (7th Gen)   | [Dolphin](https://docs.libretro.com/library/dolphin/)                                                                                                |
+| **Nintendo GameCube**              | Home Console (6th Gen)   | [Dolphin](https://docs.libretro.com/library/dolphin/)                                                                                                |
+| **Nintendo DS (NDS)**              | Handheld (7th Gen)       | [melonDS DS](https://github.com/JesseTG/melonds-ds)                                                                                                  |
+| **Nintendo 64 (N64)**              | Home Console (5th Gen)   | [mupen64plus](https://docs.libretro.com/library/mupen64plus/)                                                                                        |
+| **Game Boy Advance (GBA)**         | Handheld (6th Gen)       | [mgba](https://docs.libretro.com/library/mgba/)                                                                                                      |
+| **Game Boy / Color (GB/GBC)**      | Handheld (4th/5th Gen)   | [gambatte](https://docs.libretro.com/library/gambatte/)                                                                                              |
+| **Super Nintendo (SNES)**          | Home Console (4th Gen)   | [snes9x](https://docs.libretro.com/library/snes9x/)                                                                                                  |
+| **NES / Famicom**                  | Home Console (3rd Gen)   | [fceumm](https://docs.libretro.com/library/fceumm/)                                                                                                  |
+| **PlayStation 2 (PS2)** _(Beta)_   | Home Console (6th Gen)   | [ARMSX2](https://github.com/Ahmed-Abousaif/ARMSX2)                                                                                                   |
+| **PlayStation Portable (PSP)**     | Handheld (7th Gen)       | [ppsspp](https://docs.libretro.com/library/ppsspp/)                                                                                                  |
+| **PlayStation (PSX)**              | Home Console (5th Gen)   | [PCSX-ReARMed](https://docs.libretro.com/library/pcsx_rearmed/)                                                                                      |
+| **Sega Dreamcast**                 | Home Console (6th Gen)   | [flycast](https://docs.libretro.com/library/flycast/)                                                                                                |
+| **Sega Genesis / Mega Drive**      | Home Console (4th Gen)   | [genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/)                                                                                |
+| **Sega CD / Mega CD**              | Add-on (4th Gen)         | [genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/)                                                                                |
+| **Sega Master System / Game Gear** | 8-bit Console & Handheld | [genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/)                                                                                |
+| **Arcade**                         | Classic Coin-Op Arcade   | [FBNeo](https://github.com/libretro/FBNeo/)                                                                                                          |
+| **PC Engine / TurboGrafx-16**      | Home Console (4th Gen)   | [beetle_pce_fast](https://docs.libretro.com/library/beetle_pce_fast/)                                                                                |
+| **Neo Geo Pocket / Color**         | Handheld (5th/6th Gen)   | [mednafen_ngp](https://docs.libretro.com/library/beetle_neopop/)                                                                                     |
+| **WonderSwan / Color**             | Handheld (5th/6th Gen)   | [beetle_cygne](https://docs.libretro.com/library/beetle_cygne/)                                                                                      |
+| **Atari 2600 / 7800 / Lynx**       | Classic Atari Family     | [stella](https://docs.libretro.com/library/stella/) / [prosystem](https://docs.libretro.com/library/prosystem/) / [handy](https://docs.libretro.com/library/handy/)                  |
 
-| System                             | Console / Generation     | Emulation Core                                                                                                                                                      |
-| :--------------------------------- | :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Nintendo 3DS**                   | Handheld (8th Gen)       | [Azahar](https://github.com/azahar-emu/azahar) / [Citra](https://docs.libretro.com/library/citra/)                                                                  |
-| **Nintendo Wii U** _(Beta)_        | Home Console (8th Gen)   | [Cemu](https://github.com/cemu-project/Cemu)                                                                                                                        |
-| **Nintendo Wii** _(Beta)_          | Home Console (7th Gen)   | [Dolphin](https://docs.libretro.com/library/dolphin/)                                                                                                               |
-| **Nintendo GameCube**              | Home Console (6th Gen)   | [Dolphin](https://docs.libretro.com/library/dolphin/)                                                                                                               |
-| **Nintendo DS (NDS)**              | Handheld (7th Gen)       | [melonDS DS](https://github.com/JesseTG/melonds-ds)                                                                                                                 |
-| **Nintendo 64 (N64)**              | Home Console (5th Gen)   | [mupen64plus](https://docs.libretro.com/library/mupen64plus/)                                                                                                       |
-| **Game Boy Advance (GBA)**         | Handheld (6th Gen)       | [mgba](https://docs.libretro.com/library/mgba/)                                                                                                                     |
-| **Game Boy / Color (GB/GBC)**      | Handheld (4th/5th Gen)   | [gambatte](https://docs.libretro.com/library/gambatte/)                                                                                                             |
-| **Super Nintendo (SNES)**          | Home Console (4th Gen)   | [snes9x](https://docs.libretro.com/library/snes9x/)                                                                                                                 |
-| **NES / Famicom**                  | Home Console (3rd Gen)   | [fceumm](https://docs.libretro.com/library/fceumm/)                                                                                                                 |
-| **PlayStation 2 (PS2)** _(Beta)_   | Home Console (6th Gen)   | [ARMSX2](https://github.com/Ahmed-Abousaif/ARMSX2)                                                                                                                  |
-| **PlayStation Portable (PSP)**     | Handheld (7th Gen)       | [ppsspp](https://docs.libretro.com/library/ppsspp/)                                                                                                                 |
-| **PlayStation (PSX)**              | Home Console (5th Gen)   | [PCSX-ReARMed](https://docs.libretro.com/library/pcsx_rearmed/)                                                                                                     |
-| **Sega Dreamcast**                 | Home Console (6th Gen)   | [flycast](https://docs.libretro.com/library/flycast/)                                                                                                               |
-| **Sega Genesis / Mega Drive**      | Home Console (4th Gen)   | [genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/)                                                                                               |
-| **Sega CD / Mega CD**              | Add-on (4th Gen)         | [genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/)                                                                                               |
-| **Sega Master System / Game Gear** | 8-bit Console & Handheld | [genesis_plus_gx](https://docs.libretro.com/library/genesis_plus_gx/)                                                                                               |
-| **Arcade**                         | Classic Coin-Op Arcade   | [FBNeo](https://github.com/libretro/FBNeo/)                                                                                                                         |
-| **PC Engine / TurboGrafx-16**      | Home Console (4th Gen)   | [beetle_pce_fast](https://docs.libretro.com/library/beetle_pce_fast/)                                                                                               |
-| **Neo Geo Pocket / Color**         | Handheld (5th/6th Gen)   | [mednafen_ngp](https://docs.libretro.com/library/beetle_neopop/)                                                                                                    |
-| **WonderSwan / Color**             | Handheld (5th/6th Gen)   | [beetle_cygne](https://docs.libretro.com/library/beetle_cygne/)                                                                                                     |
-| **Atari 2600 / 7800 / Lynx**       | Classic Atari Family     | [stella](https://docs.libretro.com/library/stella/) / [prosystem](https://docs.libretro.com/library/prosystem/) / [handy](https://docs.libretro.com/library/handy/) |
+## 🎮 Getting Started
 
----
+1. Download the latest APK from the [Releases](https://github.com/bvnkfatboy/Omnidroid/releases) page (pick `arm64-v8a` for most modern devices, `universal` for anything else) and install it — Android 7.0+ required.
+2. Point Omnidroid at the folder containing your ROMs (`.zip`, `.7z` and `.chd` supported). Cores and cover art download automatically on demand.
+3. Optional: plug in a Bluetooth/USB gamepad, enable cloud save sync (Google Drive / Dropbox / OneDrive), and add a free [RAWG](https://rawg.io/apidocs) API key under **Settings → Advanced** for rich metadata and trailers.
+4. Swipe through your library 3DS-style and tap a tile to play. Long-press for per-game options.
 
-## 🔍 Features Deep Dive
+> 🎨 Prefer the old look? Switch between **3DS Home / Grid / List** with the toggle at the bottom-right of the library.
 
-<details>
-<summary><b>🌋 Vulkan Hardware Acceleration & Graphics API Selection</b></summary>
-<br>
+## 🛠️ Building from Source
 
-- **Custom Native Engine:** Built on our custom `omni-libretrodroid` engine, offering native Vulkan hardware acceleration alongside OpenGL ES 2.0/3.0+ and Software rendering.
-- **Per-System API Switching:** Configure Graphics API globally or per console (**Auto**, **Vulkan**, **OpenGL**, **Software**) directly from Settings.
-- **Low Overhead:** Drastically lowers CPU draw-call bottlenecks on modern mobile GPUs (Adreno, Mali, Immortalis), maintaining a smooth 60 FPS in demanding cores.
-</details>
+```bash
+git clone https://github.com/bvnkfatboy/Omnidroid.git
+cd Omnidroid
+git submodule update --init omnidroid-chd/src/main/cpp/libchdr   # CHD support (required)
 
-<details>
-<summary><b>📱 Handheld-First Launcher & UI Customization</b></summary>
-<br>
+# Debug APK
+./gradlew :omnidroid-app:assembleFreeBundleDebug
 
-- **Dual Layout Engines:** Switch seamlessly between **Grid View** (with dynamic zoom slider based on screen height) and a compact **List View**.
-- **Landscape Navigation:** Dedicated sidebar for quick navigation between All Games, Favorites, and specific consoles.
-- **Startup Screen Selector:** Choose what Omnidroid opens to on launch (All Games, Favorites, or a favorite console).
-- **Home Screen Launcher:** Set Omnidroid as your Android device's default launcher for a dedicated console feel.
-- **System Telemetry:** Live on-screen battery percentage, Wi-Fi/mobile network status, and connected gamepads right on the top bar.
-</details>
-
-<details>
-<summary><b>🕹️ Dual-Screen Layouts (Nintendo 3DS & DS)</b></summary>
-<br>
-
-- **Flexible Screen Configurations:** Default Top-Bottom, Side-by-Side (Left-Right), or Single Screen (Top or Bottom).
-- **Quick Screen Toggle:** Tap the on-screen layout button to instantly toggle between dual-screen and single top-screen without opening menus.
-- **True Stylus Multi-Touch:** Bottom touch screen supports simultaneous multi-touch input, allowing you to use the stylus overlay while holding virtual buttons.
-- **Hide Pads Mode:** Tap the pad toggle to slide virtual controls away for stylus-heavy gameplay; tap the edge tab to bring them back.
-</details>
-
-<details>
-<summary><b>🐬 GameCube & Wii Emulation (Dolphin Core)</b></summary>
-<br>
-
-- **Automated Sys Asset Provisioning:** Essential Dolphin `Sys/` assets (game database, system fonts, DSP binary engines) are downloaded automatically on first launch.
-- **Adaptive Internal Resolution Scaling:** 1x Native (640×528), 2x (720p), 3x (1080p), and 4x (1440p / QHD) with dynamic intermediate framebuffer reallocation.
-- **Versatile Controller Profiles:** Native GameCube controller, Sideways Wiimote (for 2D platformers), Wiimote + Nunchuk (for 3D adventures), and Wii Classic Controller.
-- **Ghost Controller Prevention:** Automatically disconnects unused controller ports to prevent false multiplayer detections in games like _Super Smash Bros. Melee_.
-</details>
-
-<details>
-<summary><b>⚡ PlayStation 2 & Wii U Emulation</b></summary>
-<br>
-
-- **PlayStation 2 (ARMSX2):** PCSX2-derived 64-bit ARM core with Vulkan, OpenGL, and Software rendering pipelines. Features dedicated DualShock 2 touch layout with dual analog sticks, rumble support, and automatic BIOS verification.
-- **Nintendo Wii U (Cemu):** Vulkan-accelerated 64-bit ARM core with Multi-Core Recompiler support, interactive touch GamePad view, and side-by-side TV/GamePad rendering.
-</details>
-
-<details>
-<summary><b>🌐 RAWG Metadata & In-App Search</b></summary>
-<br>
-
-- Under **Settings → Advanced**, enable **RAWG Game Metadata** and enter a free API key from [rawg.io/apidocs](https://rawg.io/apidocs).
-- Automatically fetches game backdrops, descriptions, release dates, ratings, and MP4 game trailers.
-- Includes in-app "Fix Match / Search Box Art" dialog with token-fuzzy search and franchise alias resolution.
-</details>
-
-<details>
-<summary><b>📊 Device Profile & Hardware Benchmarking</b></summary>
-<br>
-
-- Under **Settings → Advanced → Device profile**, view detailed hardware specs: SoC, RAM, CPU cores/frequencies, GPU / OpenGL ES, and Vulkan driver versions.
-- Built-in 30-second CPU benchmark measures emulation throughput in ops/s.
-</details>
-
----
-
-## 🛠️ For Contributors & Developers
-
-We welcome contributions of all kinds — whether you are optimizing emulation cores, refining Jetpack Compose UI, improving controller support, or improving documentation!
-
-### Architecture & Repository Modules
-
-```text
-Omnidroid/
-├── omnidroid-app/               # Main application module (Compose UI, ViewModels, Room DB)
-├── omnidroid-app-ext-free/      # Free distribution flavor configuration
-├── omnidroid-app-ext-play/      # Google Play flavor (Cloud services, Drive/Dropbox/OneDrive)
-├── omnidroid-touchinput/        # Virtual touch controller overlay and input routing
-├── omnidroid-chd/               # CHD compressed disc image decompression library
-├── omnidroid-metadata-rawg/     # RAWG.io API client for descriptions, ratings & trailers
-├── omnidroid-metadata-libretro/ # Libretro DB offline game title identification
-├── libretrodroid/               # JNI bridge between Android and native Libretro cores
-├── omni-libretrodroid/          # (Submodule) Custom native Vulkan/GLES C++ emulation runtime
-├── omnidroid-cores/             # (Submodule) Prebuilt Libretro emulation core binaries
-├── retrograde-app-shared/       # Shared UI components and emulation lifecycle utilities
-└── retrograde-util/             # File system, archive, and platform utility routines
+# Signed release APK (uses release.jks + omnidroid.storePassword in local.properties if present,
+# otherwise falls back to debug signing)
+./gradlew :omnidroid-app:assembleFreeBundleRelease
 ```
 
-### Development Setup
-
-1. **Prerequisites:**
-   - **Android Studio:** Ladybug (2024.2+) or Meerkat recommended.
-   - **JDK:** Java 17 (e.g. Eclipse Temurin 17 or OpenJDK 17).
-   - **Android SDK:** `compileSdk` / `targetSdk` **36**, `minSdk` **24**, Build Tools **36.0.0**.
-   - **NDK & CMake:** Installed via Android Studio SDK Manager.
-
-2. **Cloning the Repository:**
-   Omnidroid uses Git submodules for native engines and emulation cores. Clone recursively:
-
-   ```bash
-   git clone --recurse-submodules https://github.com/Ahmed-Abousaif/Omnidroid.git
-   cd Omnidroid
-   ```
-
-   If already cloned without `--recurse-submodules`:
-
-   ```bash
-   git submodule update --init --recursive
-   ```
-
-3. **Building the Project:**
-
-   ```bash
-   # Build debug APK (Play flavor)
-   ./gradlew assemblePlayDebug
-
-   # Build release APK (Free flavor)
-   ./gradlew assembleFreeRelease
-
-   # Run code analysis & checkstyle
-   ./gradlew checkstyle
-   ```
-
-### Modern Toolchain Baseline
-
-| Component                 | Baseline Version      | Notes                                      |
-| :------------------------ | :-------------------- | :----------------------------------------- |
-| **Android Gradle Plugin** | `9.0.0`               | Modernized build system                    |
-| **Kotlin**                | `2.2.10`              | Full Kotlin 2.x support                    |
-| **Jetpack Compose BOM**   | `2026.08.00`          | Modern declarative UI & Material 3         |
-| **Annotation Processing** | KSP `2.2.10-2.0.2`    | Clean KSP migration (`kapt` removed)       |
-| **Dependency Injection**  | Hilt `2.60.1`         | Modern Dagger/Hilt setup                   |
-| **Memory Alignment**      | `16KB Page Alignment` | Android 15+ native runtime ready           |
-| **Native Runtime**        | `omni-libretrodroid`  | Vulkan hardware acceleration & `-O3` flags |
-
-For coding conventions, Compose navigation guidelines, and pull request procedures, please read our [Contributing Guidelines](.github/CONTRIBUTING.md).
+Requirements: JDK 17+, Android SDK (compileSdk 36, build-tools 36.0.0), NDK + CMake. Without the `omnidroid-cores` submodule the build still succeeds — emulation cores are simply downloaded at runtime instead of being bundled.
 
 ---
 
-## Star History
+## 🙏 Credits & Acknowledgements
 
-<a href="https://www.star-history.com/?repos=ahmed-abousaif%2Fomnidroid&type=date&releases=&legend=bottom-right">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ahmed-abousaif/omnidroid&type=date&theme=dark&legend=bottom-right" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ahmed-abousaif/omnidroid&type=date&legend=bottom-right" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=ahmed-abousaif/omnidroid&type=date&legend=bottom-right" />
- </picture>
-</a>
+This project stands on the shoulders of giants:
 
----
+- **[Filippo Scognamiglio (Swordfish90)](https://github.com/Swordfish90)** — creator of [Lemuroid](https://github.com/Swordfish90/Lemuroid) and [LibretroDroid](https://github.com/Swordfish90/LibretroDroid), the foundation everything here is built on.
+- **[Ahmed Abousaif](https://github.com/Ahmed-Abousaif)** — creator of [Omnidroid](https://github.com/Ahmed-Abousaif/Omnidroid), the landscape-first Lemuroid fork with Vulkan graphics API switching, RAWG metadata, cloud saves and the gamer profile system that this project builds upon.
+- **The [libretro](https://www.libretro.com) team** and every core author — the decades of emulation work that make any of this possible.
+- **The Retrograde project** — the original Android Libretro frontend Lemuroid descended from.
+- The 3DS Edition UI is an affectionate homage to the Nintendo 3DS HOME Menu. Not affiliated with Nintendo. "Nintendo 3DS" is a trademark of Nintendo.
 
-## 📜 License & Acknowledgements
+## 📄 License
 
-- **License:** Omnidroid is licensed under the [GNU General Public License v3.0 (GPLv3)](COPYING).
-- **Upstream & Heritage:** Based on [Lemuroid](https://github.com/Swordfish90/Lemuroid) by Filippo Scognamiglio, which originated from [Retrograde](https://github.com/retrograde/retrograde-android).
-- **Libretro:** Built on the incredible [Libretro](https://www.libretro.com/) ecosystem and powered by the dedicated authors of all open-source emulation cores.
+Omnidroid — © 2020 Filippo Scognamiglio, 2024 Ahmed Abousaif, 2026 [bvnkfatboy](https://github.com/bvnkfatboy) (3DS Edition changes)
+
+This program is free software: you can redistribute it and/or modify it under the terms of the [GNU General Public License v3](./COPYING). The Nunito font is used under the [SIL Open Font License](https://openfontlicense.org).

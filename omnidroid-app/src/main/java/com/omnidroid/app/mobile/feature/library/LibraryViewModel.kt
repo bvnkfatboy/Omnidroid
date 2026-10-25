@@ -56,7 +56,7 @@ class LibraryViewModel(
         val operationInProgress: Boolean = false,
         val syncProgress: SyncProgress? = null,
         val zoomDensity: Int = 0,
-        val layout: LibraryLayout = LibraryLayout.GRID,
+        val layout: LibraryLayout = LibraryLayout.HOME,
         val portrait: Boolean = false,
         val selectedSystemGameCount: Int? = null,
         val startupFilter: LibraryFilter = LibraryFilter.All,
@@ -234,9 +234,10 @@ class LibraryViewModel(
     }
 
     private fun readLayout(): LibraryLayout {
-        return when (preferences.getString(LAYOUT_KEY, LibraryLayout.GRID.name)) {
+        return when (preferences.getString(LAYOUT_KEY, LibraryLayout.HOME.name)) {
+            LibraryLayout.GRID.name -> LibraryLayout.GRID
             LibraryLayout.LIST.name -> LibraryLayout.LIST
-            else -> LibraryLayout.GRID
+            else -> LibraryLayout.HOME
         }
     }
 
@@ -349,4 +350,5 @@ class LibraryViewModel(
 enum class LibraryLayout {
     GRID,
     LIST,
+    HOME,
 }

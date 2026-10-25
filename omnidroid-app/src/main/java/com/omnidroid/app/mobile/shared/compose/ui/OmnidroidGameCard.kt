@@ -1,6 +1,7 @@
 package com.omnidroid.app.mobile.shared.compose.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
@@ -64,6 +65,7 @@ fun OmnidroidGameCard(
     infoStyle: GameCardInfoStyle = GameCardInfoStyle.OVERLAY,
     fillCard: Boolean = false,
     cornerRadius: androidx.compose.ui.unit.Dp = 4.dp,
+    selected: Boolean = false,
     onClick: () -> Unit = { },
     onLongClick: () -> Unit = { },
 ) {
@@ -75,6 +77,7 @@ fun OmnidroidGameCard(
             game = game,
             continueAction = continueAction,
             cornerRadius = cornerRadius,
+            selected = selected,
             onClick = onClick,
             onLongClick = onLongClick,
         )
@@ -91,9 +94,15 @@ fun OmnidroidGameCard(
                     onLongClick = onLongClick,
                 ),
         shape = cardShape,
-        color = Color(0xFF161616),
-        shadowElevation = 4.dp,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        shadowElevation = if (selected) 10.dp else 4.dp,
         tonalElevation = 0.dp,
+        border =
+            if (selected) {
+                BorderStroke(3.dp, ThreeDsTileWhite)
+            } else {
+                BorderStroke(1.dp, ThreeDsTileBorder)
+            },
     ) {
         Box(modifier = if (fillCard) Modifier.fillMaxSize() else Modifier.fillMaxWidth()) {
             OmnidroidGameImage(
@@ -122,6 +131,7 @@ private fun CaptionBelowGameCard(
     game: Game,
     continueAction: Boolean,
     cornerRadius: androidx.compose.ui.unit.Dp = 4.dp,
+    selected: Boolean = false,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
 ) {
@@ -141,9 +151,15 @@ private fun CaptionBelowGameCard(
                         onLongClick = onLongClick,
                     ),
             shape = cardShape,
-            color = Color(0xFF161616),
-            shadowElevation = 4.dp,
+            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+            shadowElevation = if (selected) 10.dp else 4.dp,
             tonalElevation = 0.dp,
+            border =
+                if (selected) {
+                    BorderStroke(3.dp, ThreeDsTileWhite)
+                } else {
+                    BorderStroke(1.dp, ThreeDsTileBorder)
+                },
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
                 OmnidroidGameImage(
@@ -325,7 +341,12 @@ private fun GameCardInfo(
                     fontWeight = FontWeight.Medium,
                     shadow = textShadow,
                 ),
-            color = Color(0xFFBDBDBD),
+            color =
+                if (overlay) {
+                    Color(0xFFDDDDDD)
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                },
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
@@ -336,7 +357,12 @@ private fun GameCardInfo(
                     fontWeight = FontWeight.SemiBold,
                     shadow = textShadow,
                 ),
-            color = Color.White,
+            color =
+                if (overlay) {
+                    Color.White
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                },
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )

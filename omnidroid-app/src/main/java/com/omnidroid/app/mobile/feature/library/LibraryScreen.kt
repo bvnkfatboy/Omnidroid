@@ -8,7 +8,10 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -52,6 +55,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -71,9 +76,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -94,6 +101,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -109,7 +117,12 @@ import com.omnidroid.app.mobile.shared.compose.ui.OmnidroidGameImage
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryGameCardAspectRatio
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
 import com.omnidroid.app.mobile.shared.compose.ui.LocalAdaptiveLayout
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileBorder
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileWhite
 import com.omnidroid.app.mobile.shared.compose.ui.avoidDisplayCutout
+import com.omnidroid.app.mobile.shared.compose.ui.threeDsStripedBackground
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
@@ -121,7 +134,11 @@ import com.omnidroid.app.mobile.shared.controller.reportControllerGame
 import com.omnidroid.app.utils.games.GameUtils
 import com.omnidroid.lib.library.MetaSystemID
 import com.omnidroid.lib.library.db.entity.Game
+import kotlin.math.abs
 import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
+import androidx.compose.material.icons.filled.Home
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsSelectedBorder
 
 val LibrarySidebarWidth = 80.dp
 val LibrarySidebarButtonSize = 48.dp
@@ -208,7 +225,7 @@ fun LibraryScreen(
         modifier =
             modifier
                 .fillMaxSize()
-                .background(HomeChromeBackground),
+                .threeDsStripedBackground(),
     ) {
         if (state.portrait) {
             Column(
@@ -389,7 +406,7 @@ private fun SidebarIconButton(
         onClick = onClick,
         modifier = Modifier.size(adaptiveSpec.sidebarButtonSize).controllerFocusGlow(CircleShape),
         shape = CircleShape,
-        color = if (selected) Color(0xFF242424) else Color(0xFF161616),
+        color = if (selected) MaterialTheme.colorScheme.secondaryContainer else ThreeDsTileWhite,
         shadowElevation = 6.dp,
         tonalElevation = 0.dp,
         border = sidebarSelectionBorder(selected),
@@ -399,7 +416,7 @@ private fun SidebarIconButton(
                 imageVector = icon,
                 contentDescription = contentDescription,
                 modifier = Modifier.size(adaptiveSpec.sidebarIconSize),
-                tint = if (selected) LibraryNeonGreen else Color.White,
+                tint = if (selected) LibraryNeonGreen else ThreeDsTextGray,
             )
             StartupBadge(visible = pinned)
         }
@@ -459,7 +476,7 @@ private fun SidebarSystemLogoButton(
 private fun sidebarSelectionBorder(selected: Boolean) =
     BorderStroke(
         width = if (selected) 2.dp else 1.dp,
-        color = if (selected) LibraryNeonGreen else Color(0xFF2E2E2E),
+        color = if (selected) LibraryNeonGreen else ThreeDsTileBorder,
     )
 
 @Composable
@@ -510,7 +527,7 @@ private fun PortraitConsoleBar(
                     .padding(horizontal = 2.dp)
                     .width(1.dp)
                     .height(28.dp)
-                    .background(Color.White.copy(alpha = 0.12f)),
+                    .background(ThreeDsTextDark.copy(alpha = 0.12f)),
         )
         Spacer(modifier = Modifier.width(8.dp))
         LazyRow(
@@ -620,7 +637,19 @@ private fun LibraryGames(
                 else -> {
                     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                     val featured = continueGame.takeIf { showContinue }
-                    if (state.layout == LibraryLayout.LIST) {
+                    if (state.layout == LibraryLayout.HOME) {
+                        ThreeDsHomeCarousel(
+                            modifier = Modifier.fillMaxSize(),
+                            sharedTransitionScope = sharedTransitionScope,
+                            animatedVisibilityScope = animatedVisibilityScope,
+                            games = games,
+                            featured = featured,
+                            firstItemRequester = firstItemRequester,
+                            onGameClick = onGameClick,
+                            onContinueClick = onContinueClick,
+                            onGameLongClick = onGameLongClick,
+                        )
+                    } else if (state.layout == LibraryLayout.LIST) {
                         LazyColumn(
                             modifier =
                                 Modifier
@@ -844,6 +873,250 @@ private fun LibraryGameCardItem(
     )
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun ThreeDsHomeCarousel(
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    games: LazyPagingItems<Game>,
+    featured: Game?,
+    firstItemRequester: FocusRequester,
+    onGameClick: (Game) -> Unit,
+    onContinueClick: (Game) -> Unit,
+    onGameLongClick: (Game) -> Unit,
+) {
+    val context = LocalContext.current
+    val listState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+    val featuredOffset = if (featured != null) 1 else 0
+    val centeredIndex by remember {
+        derivedStateOf {
+            val info = listState.layoutInfo
+            val viewportCenter = (info.viewportStartOffset + info.viewportEndOffset) / 2
+            info.visibleItemsInfo
+                .minByOrNull { abs(it.offset + it.size / 2 - viewportCenter) }
+                ?.index ?: 0
+        }
+    }
+    val canScrollBack by remember { derivedStateOf { listState.canScrollBackward } }
+    val canScrollForward by remember { derivedStateOf { listState.canScrollForward } }
+    BoxWithConstraints(modifier = modifier) {
+        val tileHeight = maxHeight * 0.5f
+        val tileWidth = tileHeight * LibraryGameCardAspectRatio
+        val horizontalPadding = ((maxWidth - tileWidth) / 2f).coerceAtLeast(24.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Box(
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+            ) {
+                LazyRow(
+                    state = listState,
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .focusGroup(),
+                    contentPadding = PaddingValues(horizontal = horizontalPadding),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    if (featured != null) {
+                        item(key = "continue-${featured.id}") {
+                            ThreeDsCarouselTile(
+                                sharedTransitionScope = sharedTransitionScope,
+                                animatedVisibilityScope = animatedVisibilityScope,
+                                game = featured,
+                                isCentered = centeredIndex == 0,
+                                tileWidth = tileWidth,
+                                continueAction = true,
+                                modifier = Modifier.focusRequester(firstItemRequester),
+                                onClick = { onContinueClick(featured) },
+                                onLongClick = { onGameLongClick(featured) },
+                            )
+                        }
+                    }
+                    items(
+                        count = games.itemCount,
+                        key = { index -> games.peek(index)?.id ?: index },
+                    ) { index ->
+                        val game = games[index] ?: return@items
+                        ThreeDsCarouselTile(
+                            sharedTransitionScope = sharedTransitionScope,
+                            animatedVisibilityScope = animatedVisibilityScope,
+                            game = game,
+                            isCentered = centeredIndex == index + featuredOffset,
+                            tileWidth = tileWidth,
+                            continueAction = false,
+                            modifier =
+                                if (featured == null && index == 0) {
+                                    Modifier.focusRequester(firstItemRequester)
+                                } else {
+                                    Modifier
+                                },
+                            onClick = { onGameClick(game) },
+                            onLongClick = { onGameLongClick(game) },
+                        )
+                    }
+                }
+                if (canScrollBack) {
+                    ThreeDsCarouselArrow(
+                        icon = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                        contentDescription = stringResource(R.string.library_carousel_previous),
+                        onClick = {
+                            scope.launch {
+                                listState.animateScrollToItem((centeredIndex - 1).coerceAtLeast(0))
+                            }
+                        },
+                        modifier = Modifier.align(Alignment.CenterStart),
+                    )
+                }
+                if (canScrollForward) {
+                    ThreeDsCarouselArrow(
+                        icon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = stringResource(R.string.library_carousel_next),
+                        onClick = {
+                            scope.launch {
+                                listState.animateScrollToItem(centeredIndex + 1)
+                            }
+                        },
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                    )
+                }
+            }
+            val centeredGame =
+                when {
+                    featured != null && centeredIndex == 0 -> featured
+                    centeredIndex - featuredOffset >= 0 -> games[centeredIndex - featuredOffset]
+                    else -> null
+                }
+            centeredGame?.let { game ->
+                val consoleName =
+                    remember(game.id) { GameUtils.getSystemShortName(context, game) }
+                Column(
+                    modifier =
+                        Modifier.padding(
+                            start = 24.dp,
+                            end = 24.dp,
+                            top = 8.dp,
+                            bottom = 12.dp,
+                        ),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        text = game.displayName,
+                        style =
+                            MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.Bold,
+                            ),
+                        color = ThreeDsTextDark,
+                        textAlign = TextAlign.Center,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    Text(
+                        text = consoleName,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = ThreeDsTextGray,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun ThreeDsCarouselTile(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    game: Game,
+    isCentered: Boolean,
+    tileWidth: Dp,
+    continueAction: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    onLongClick: () -> Unit,
+) {
+    val scale by animateFloatAsState(
+        targetValue = if (isCentered) 1f else 0.86f,
+        animationSpec =
+            spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessMediumLow,
+            ),
+        label = "threeDsTileScale-${game.id}",
+    )
+    val coverSharedModifier =
+        with(sharedTransitionScope) {
+            Modifier.sharedBounds(
+                sharedContentState = rememberSharedContentState(key = "game-cover-${game.id}"),
+                animatedVisibilityScope = animatedVisibilityScope,
+                enter = EnterTransition.None,
+                exit = ExitTransition.None,
+                resizeMode = SharedTransitionScope.ResizeMode.RemeasureToBounds,
+                boundsTransform = { _, _ ->
+                    tween(durationMillis = 400, easing = FastOutSlowInEasing)
+                },
+                clipInOverlayDuringTransition = OverlayClip(RoundedCornerShape(16.dp)),
+            )
+        }
+    OmnidroidGameCard(
+        modifier =
+            modifier
+                .width(tileWidth)
+                .graphicsLayer {
+                    scaleX = scale
+                    scaleY = scale
+                    alpha = if (isCentered) 1f else 0.85f
+                },
+        coverModifier = coverSharedModifier,
+        game = game,
+        continueAction = continueAction,
+        infoStyle = GameCardInfoStyle.MINIMAL,
+        cornerRadius = 16.dp,
+        selected = isCentered,
+        onClick = onClick,
+        onLongClick = onLongClick,
+    )
+}
+
+@Composable
+private fun ThreeDsCarouselArrow(
+    icon: ImageVector,
+    contentDescription: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        onClick = onClick,
+        modifier =
+            modifier
+                .size(36.dp)
+                .controllerFocusGlow(CircleShape),
+        shape = CircleShape,
+        color = ThreeDsTileWhite.copy(alpha = 0.92f),
+        shadowElevation = 4.dp,
+        tonalElevation = 0.dp,
+        border = BorderStroke(1.dp, ThreeDsTileBorder),
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Icon(
+                imageVector = icon,
+                contentDescription = contentDescription,
+                modifier = Modifier.size(22.dp),
+                tint = ThreeDsTextDark,
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalFoundationApi::class)
 @Composable
 private fun LibraryGameRow(
@@ -897,10 +1170,10 @@ private fun LibraryGameRow(
                     onLongClick = onLongClick,
                 ),
         shape = shape,
-        color = Color(0xFF161616),
+        color = ThreeDsTileWhite,
         shadowElevation = 4.dp,
         tonalElevation = 0.dp,
-        border = BorderStroke(1.dp, Color(0xFF2E2E2E)),
+        border = BorderStroke(1.dp, ThreeDsTileBorder),
     ) {
         Row(
             modifier =
@@ -932,14 +1205,14 @@ private fun LibraryGameRow(
                         MaterialTheme.typography.titleSmall.copy(
                             fontWeight = FontWeight.SemiBold,
                         ),
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
                 Text(
                     text = subtitle,
                     style = MaterialTheme.typography.labelMedium,
-                    color = Color(0xFFBDBDBD),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(top = 2.dp),
@@ -1065,9 +1338,9 @@ private fun LibraryViewModeButtons(
             modifier =
                 Modifier
                     .size(28.dp)
-                    .background(Color(0xFF161616), CircleShape)
+                    .background(ThreeDsTileWhite, CircleShape)
                     .border(
-                        BorderStroke(1.dp, if (portrait) LibraryNeonGreen else Color(0xFF2E2E2E)),
+                        BorderStroke(1.dp, if (portrait) LibraryNeonGreen else ThreeDsTileBorder),
                         CircleShape,
                     ),
         ) {
@@ -1095,11 +1368,17 @@ private fun LibraryLayoutToggle(
         modifier =
             Modifier
                 .height(28.dp)
-                .background(Color(0xFF161616), CircleShape)
-                .border(BorderStroke(1.dp, Color(0xFF2E2E2E)), CircleShape)
+                .background(ThreeDsTileWhite, CircleShape)
+                .border(BorderStroke(1.dp, ThreeDsTileBorder), CircleShape)
                 .padding(2.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        LayoutToggleIcon(
+            selected = layout == LibraryLayout.HOME,
+            icon = Icons.Filled.Home,
+            contentDescription = stringResource(R.string.library_view_home),
+            onClick = { onLayoutChange(LibraryLayout.HOME) },
+        )
         LayoutToggleIcon(
             selected = layout == LibraryLayout.GRID,
             icon = Icons.Filled.GridView,
@@ -1130,7 +1409,7 @@ private fun LayoutToggleIcon(
                 .size(boxSize)
                 .controllerFocusGlow(CircleShape)
                 .background(
-                    color = if (selected) Color(0xFF242424) else Color.Transparent,
+                    color = if (selected) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent,
                     shape = CircleShape,
                 )
                 .clickable(onClick = onClick),
@@ -1140,7 +1419,7 @@ private fun LayoutToggleIcon(
             imageVector = icon,
             contentDescription = contentDescription,
             modifier = Modifier.size(iconSize),
-            tint = if (selected) LibraryNeonGreen else Color.White.copy(alpha = 0.72f),
+            tint = if (selected) LibraryNeonGreen else ThreeDsTextGray,
         )
     }
 }
@@ -1172,7 +1451,7 @@ private fun LibraryZoomControls(
                 imageVector = Icons.Outlined.ZoomOut,
                 contentDescription = stringResource(R.string.library_zoom_out),
                 modifier = Modifier.size(18.dp),
-                tint = Color.White.copy(alpha = if (zoomOutEnabled) 1f else 0.35f),
+                tint = ThreeDsTextGray.copy(alpha = if (zoomOutEnabled) 1f else 0.35f),
             )
         }
         ZoomTrack(
@@ -1220,7 +1499,7 @@ private fun LibraryZoomControls(
                 imageVector = Icons.Outlined.ZoomIn,
                 contentDescription = stringResource(R.string.library_zoom_in),
                 modifier = Modifier.size(18.dp),
-                tint = Color.White.copy(alpha = if (zoomInEnabled) 1f else 0.35f),
+                tint = ThreeDsTextGray.copy(alpha = if (zoomInEnabled) 1f else 0.35f),
             )
         }
     }
@@ -1233,7 +1512,7 @@ private fun ZoomTrack(
     modifier: Modifier = Modifier,
 ) {
     val thumbColor = LibraryNeonGreen
-    val trackColor = Color(0xFF8A8A8A)
+    val trackColor = ThreeDsSelectedBorder
     Box(
         modifier =
             modifier.pointerInput(Unit) {

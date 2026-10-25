@@ -93,6 +93,7 @@ import com.omnidroid.touchinput.radial.ui.OmnidroidButtonPressFeedback
 import gg.padkit.PadKit
 import gg.padkit.config.HapticFeedbackType
 import gg.padkit.inputstate.InputState
+import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
 
 @Composable
 fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
@@ -598,7 +599,7 @@ private fun MenuEditTouchControls(
                         modifier = Modifier.weight(1f),
                         colors =
                             ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFF2E7D32),
+                                containerColor = LibraryNeonGreen,
                                 contentColor = Color.White,
                             ),
                         shape = RoundedCornerShape(8.dp),

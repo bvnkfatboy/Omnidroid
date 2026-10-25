@@ -281,8 +281,6 @@ class GameViewModelRetroGameView(
             preferLowLatencyAudio = lowLatencyAudio && !systemCoreConfig.forceStandardAudioBuffer
             rumbleEventsEnabled = requestRumble
             skipDuplicateFrames = systemCoreConfig.skipDuplicateFrames
-            allowFrameCatchUp = systemCoreConfig.allowFrameCatchUp
-            nonBlockingVulkanPresent = systemCoreConfig.nonBlockingVulkanPresent
             enableMicrophone = requestMicrophone
             immersiveMode = buildImmersiveModeConfiguration(enableImmersiveMode)
         }

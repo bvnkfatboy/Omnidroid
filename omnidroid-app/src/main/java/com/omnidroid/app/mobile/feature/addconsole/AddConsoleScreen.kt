@@ -39,6 +39,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import com.omnidroid.app.mobile.shared.compose.ui.threeDsStripedBackground
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
@@ -65,6 +67,7 @@ import com.omnidroid.app.mobile.shared.controller.controllerFocusGlow
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
+import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
 
 private val Squircle = RoundedCornerShape(28.dp)
 private val ButtonShape = RoundedCornerShape(16.dp)
@@ -133,13 +136,13 @@ fun AddConsoleScreen(
     navigation?.onCarouselConfirm = { confirmSelection() }
 
     val selected = consoles.getOrNull(selectedIndex)
-    val accent = selected?.let { Color(it.metaSystemID.color()) } ?: Color(0xFF3EE366)
+    val accent = selected?.let { Color(it.metaSystemID.color()) } ?: LibraryNeonGreen
 
     Box(
         modifier =
             modifier
                 .fillMaxSize()
-                .background(HomeChromeBackground)
+                .threeDsStripedBackground()
                 .centerGlow(accent)
                 .focusRequester(focusRequester)
                 .focusable()
@@ -314,7 +317,7 @@ private fun ConsoleDetails(
     ) {
         Text(
             text = title,
-            color = Color.White,
+            color = ThreeDsTextDark,
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center,

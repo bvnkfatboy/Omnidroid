@@ -26,11 +26,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 
 val ControllerHintBarRowHeight = 32.dp
-private val HintKeyFill = Color(0xFF2A2A33)
-private val HintKeyBorder = Color(0x66FFFFFF)
-private val HintLabel = Color(0xD9FFFFFF)
+private val HintKeyFill = Color(0xFFFFFFFF)
+private val HintKeyBorder = Color(0x668A867C)
+private val HintLabel = Color(0xE63C3A35)
 
 @Composable
 fun ControllerHintBar(
@@ -51,8 +52,8 @@ fun ControllerHintBar(
                     .height(ControllerHintBarRowHeight)
                     .background(
                         Brush.verticalGradient(
-                            0f to Color.Black,
-                            0.45f to Color.Black.copy(alpha = 0.82f),
+                            0f to Color(0xFFF9F6EE),
+                            0.45f to Color(0xFFF9F6EE).copy(alpha = 0.82f),
                             1f to Color.Transparent,
                         ),
                     )
@@ -118,7 +119,7 @@ private fun HintKeyChip(label: String) {
     ) {
         Text(
             text = label,
-            color = Color.White,
+            color = ThreeDsTextDark,
             style =
                 TextStyle(
                     fontSize = 9.sp,

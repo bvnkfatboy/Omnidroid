@@ -44,3 +44,6 @@ prompt.md
 # Wii U title keys (shipped only as omnidroid-cores/assets/cemu.zip)
 keys.txt
 
+
+# Release signing keystore (keep private)
+release.jks

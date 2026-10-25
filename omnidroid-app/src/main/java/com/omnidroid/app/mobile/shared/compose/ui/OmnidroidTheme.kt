@@ -1,10 +1,17 @@
 package com.omnidroid.app.mobile.shared.compose.ui
 
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.omnidroid.R
 
 private val LightColorScheme =
     lightColorScheme(
@@ -72,16 +79,57 @@ private val DarkColorScheme =
         scrim = md_theme_dark_scrim,
     )
 
-val HomeChromeBackground = Color(0xFF0B0B0B)
-val LibraryNeonGreen = Color(0xFF00B33C)
+// 3DS HOME Menu cream chrome behind every screen.
+val HomeChromeBackground = Color(0xFFF7F4EA)
+// Fresh pastel accent used for continue buttons, selection highlights and underlines.
+val LibraryNeonGreen = Color(0xFF4C8C3B)
 val BatteryLowRed = Color(0xFFFF3B30)
+
+private val RoundedFontFamily =
+    FontFamily(
+        Font(R.font.nunito_regular, FontWeight.Normal),
+        Font(R.font.nunito_semibold, FontWeight.SemiBold),
+        Font(R.font.nunito_bold, FontWeight.Bold),
+    )
+
+private fun roundedTypography(base: Typography): Typography =
+    Typography(
+        displayLarge = base.displayLarge.copy(fontFamily = RoundedFontFamily),
+        displayMedium = base.displayMedium.copy(fontFamily = RoundedFontFamily),
+        displaySmall = base.displaySmall.copy(fontFamily = RoundedFontFamily),
+        headlineLarge = base.headlineLarge.copy(fontFamily = RoundedFontFamily),
+        headlineMedium = base.headlineMedium.copy(fontFamily = RoundedFontFamily),
+        headlineSmall = base.headlineSmall.copy(fontFamily = RoundedFontFamily),
+        titleLarge = base.titleLarge.copy(fontFamily = RoundedFontFamily),
+        titleMedium = base.titleMedium.copy(fontFamily = RoundedFontFamily),
+        titleSmall = base.titleSmall.copy(fontFamily = RoundedFontFamily),
+        bodyLarge = base.bodyLarge.copy(fontFamily = RoundedFontFamily),
+        bodyMedium = base.bodyMedium.copy(fontFamily = RoundedFontFamily),
+        bodySmall = base.bodySmall.copy(fontFamily = RoundedFontFamily),
+        labelLarge = base.labelLarge.copy(fontFamily = RoundedFontFamily),
+        labelMedium = base.labelMedium.copy(fontFamily = RoundedFontFamily),
+        labelSmall = base.labelSmall.copy(fontFamily = RoundedFontFamily),
+    )
+
+private val ThreeDsShapes =
+    Shapes(
+        extraSmall = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
+        small = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
+        medium = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+        large = androidx.compose.foundation.shape.RoundedCornerShape(20.dp),
+        extraLarge = androidx.compose.foundation.shape.RoundedCornerShape(28.dp),
+    )
 
 @Composable
 fun AppTheme(
-    darkTheme: Boolean = true,
+    darkTheme: Boolean = false,
     content: @Composable () -> Unit,
 ) {
-    MaterialTheme(colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme) {
+    MaterialTheme(
+        colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
+        typography = roundedTypography(Typography()),
+        shapes = ThreeDsShapes,
+    ) {
         content()
     }
 }

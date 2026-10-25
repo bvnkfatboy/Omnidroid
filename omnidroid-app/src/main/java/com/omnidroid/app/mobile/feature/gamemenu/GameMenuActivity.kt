@@ -73,6 +73,7 @@ import com.omnidroid.app.mobile.feature.gamemenu.states.GameMenuStatesViewModel
 import com.omnidroid.app.mobile.shared.compose.ui.AppTheme
 import com.omnidroid.app.mobile.shared.compose.ui.HomeChromeBackground
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 import com.omnidroid.app.mobile.shared.controller.ControllerHintBar
 import com.omnidroid.app.mobile.shared.controller.ControllerHintBarRowHeight
 import com.omnidroid.app.mobile.shared.controller.ControllerHints
@@ -296,7 +297,7 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                         Surface(
                             modifier = Modifier.fillMaxHeight().width(panelWidth),
                             color = HomeChromeBackground,
-                            contentColor = Color.White,
+                            contentColor = MaterialTheme.colorScheme.onSurface,
                             shape = RectangleShape,
                             tonalElevation = 0.dp,
                             shadowElevation = 0.dp,
@@ -330,7 +331,7 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                                             Modifier
                                                 .fillMaxWidth()
                                                 .height(1.dp)
-                                                .background(Color.White.copy(alpha = 0.08f)),
+                                                .background(ThreeDsTextDark.copy(alpha = 0.08f)),
                                     )
                                     NavHost(
                                         modifier =
@@ -436,7 +437,7 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                         .controllerFocusGlow(CircleShape),
                 shape = CircleShape,
                 color = Color.Transparent,
-                contentColor = Color.White,
+                contentColor = MaterialTheme.colorScheme.onSurface,
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     if (canGoBack) {
@@ -458,7 +459,7 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                     MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.SemiBold,
                     ),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(start = 8.dp),
                 maxLines = 1,
             )

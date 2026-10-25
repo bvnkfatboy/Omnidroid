@@ -94,17 +94,22 @@ import androidx.compose.ui.window.DialogProperties
 import coil.compose.AsyncImage
 import com.omnidroid.R
 import com.omnidroid.app.mobile.shared.compose.ui.HomeChromeBackground
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileBorder
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileWhite
+import com.omnidroid.app.mobile.shared.compose.ui.threeDsStripedBackground
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
 import java.text.DateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-private val PanelColor = Color(0xFF1A1A1A)
-private val DialogColor = Color(0xFF1E1E1E)
-private val PanelBorder = Color.White.copy(alpha = 0.08f)
-private val DialogBorder = Color.White.copy(alpha = 0.14f)
-private val SubtitleColor = Color.White.copy(alpha = 0.55f)
+private val PanelColor = ThreeDsTileWhite
+private val DialogColor = ThreeDsTileWhite
+private val PanelBorder = ThreeDsTileBorder
+private val DialogBorder = ThreeDsTileBorder
+private val SubtitleColor = ThreeDsTextGray
 private val PanelShape = RoundedCornerShape(14.dp)
 private val FireColor = Color(0xFFFF6D00)
 private val DangerColor = Color(0xFFFF5252)
@@ -139,7 +144,7 @@ fun ProfileScreen(
         modifier =
             modifier
                 .fillMaxSize()
-                .background(HomeChromeBackground),
+                .threeDsStripedBackground(),
     ) {
         val isLandscape = maxWidth > maxHeight
         val isLargeLandscape = isLandscape && (maxWidth >= 840.dp || maxHeight >= 500.dp)
@@ -432,7 +437,7 @@ private fun ProfileHeaderSection(
                                     ),
                                 shape = CircleShape,
                             )
-                            .background(Color(0xFF222222))
+                            .background(Color(0xFFEDE9DE))
                             .clickable(onClick = onAvatarClick),
                     contentAlignment = Alignment.Center,
                 ) {
@@ -486,7 +491,7 @@ private fun ProfileHeaderSection(
             ) {
                 Text(
                     text = tag,
-                    color = Color.White,
+                    color = ThreeDsTextDark,
                     fontSize = if (isLargeScreen) 23.sp else if (compact) 17.sp else 21.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
@@ -586,7 +591,7 @@ private fun ProfileLevelCard(
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = stringResource(R.string.profile_level, level),
-                        color = Color.White,
+                        color = ThreeDsTextDark,
                         fontSize = if (isLargeScreen) 20.sp else if (compact) 15.sp else 18.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -610,7 +615,7 @@ private fun ProfileLevelCard(
                         .height(if (isLargeScreen) 9.dp else if (compact) 6.dp else 8.dp)
                         .clip(RoundedCornerShape(4.dp)),
                 color = LibraryNeonGreen,
-                trackColor = Color.White.copy(alpha = 0.1f),
+                trackColor = ThreeDsTextDark.copy(alpha = 0.12f),
             )
 
             Spacer(modifier = Modifier.height(if (isLargeScreen) 6.dp else if (compact) 4.dp else 6.dp))
@@ -691,7 +696,7 @@ private fun ProfileStatColumn(
         Spacer(modifier = Modifier.height(2.dp))
         Text(
             text = value,
-            color = Color.White,
+            color = ThreeDsTextDark,
             fontSize = if (isLargeScreen) 18.sp else if (compact) 13.sp else 16.sp,
             fontWeight = FontWeight.Bold,
         )
@@ -736,7 +741,7 @@ private fun ProfileStreakCard(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = stringResource(R.string.profile_streak_current),
-                        color = Color.White,
+                        color = ThreeDsTextDark,
                         fontSize = if (isLargeScreen) 17.sp else 15.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -760,7 +765,7 @@ private fun ProfileStreakCard(
                 Column {
                     Text(
                         text = stringResource(R.string.profile_streak_days, currentStreak),
-                        color = Color.White,
+                        color = ThreeDsTextDark,
                         fontSize = if (isLargeScreen) 26.sp else 22.sp,
                         fontWeight = FontWeight.ExtraBold,
                     )
@@ -794,7 +799,7 @@ private fun ProfileStreakCard(
                                         if (active) {
                                             if (isMaxBonus) LibraryNeonGreen else FireColor
                                         } else {
-                                            Color.White.copy(alpha = 0.12f)
+                                            ThreeDsTextDark.copy(alpha = 0.12f)
                                         },
                                     ),
                         )
@@ -845,7 +850,7 @@ private fun ProfileAchievementsCard(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = stringResource(R.string.profile_achievements),
-                        color = Color.White,
+                        color = ThreeDsTextDark,
                         fontSize = if (isLargeScreen) 17.sp else 15.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -900,11 +905,11 @@ private fun ConsoleAchievementItem(
     val unlocked = achievement.unlocked
     Surface(
         shape = RoundedCornerShape(12.dp),
-        color = if (unlocked) Color(0xFF242424) else Color(0xFF121212),
+        color = if (unlocked) ThreeDsTileWhite else Color(0xFFF1EEE4),
         border =
             BorderStroke(
                 1.dp,
-                if (unlocked) LibraryNeonGreen.copy(alpha = 0.45f) else Color.White.copy(alpha = 0.07f),
+                if (unlocked) LibraryNeonGreen.copy(alpha = 0.45f) else ThreeDsTextDark.copy(alpha = 0.1f),
             ),
         modifier = modifier.aspectRatio(1f),
     ) {
@@ -926,7 +931,7 @@ private fun ConsoleAchievementItem(
                 Icon(
                     painter = painterResource(achievement.imageResId),
                     contentDescription = stringResource(achievement.nameResId),
-                    tint = if (unlocked) Color.White else Color.White.copy(alpha = 0.18f),
+                    tint = if (unlocked) ThreeDsTextDark else ThreeDsTextDark.copy(alpha = 0.18f),
                     modifier =
                         Modifier
                             .fillMaxWidth(0.62f)
@@ -957,7 +962,7 @@ private fun ConsoleAchievementItem(
 
             Text(
                 text = stringResource(achievement.nameResId),
-                color = if (unlocked) Color.White else Color.White.copy(alpha = 0.4f),
+                color = if (unlocked) ThreeDsTextDark else ThreeDsTextGray,
                 fontSize = if (isLargeScreen) 10.sp else 9.sp,
                 fontWeight = if (unlocked) FontWeight.Bold else FontWeight.Normal,
                 maxLines = 1,
@@ -1009,7 +1014,7 @@ private fun ProfileRecentSessionsCard(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = stringResource(R.string.profile_recent_sessions),
-                        color = Color.White,
+                        color = ThreeDsTextDark,
                         fontSize = if (isLargeScreen) 17.sp else 15.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -1114,7 +1119,7 @@ private fun RecentSessionRow(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = item.gameTitle,
-                color = Color.White,
+                color = ThreeDsTextDark,
                 fontSize = if (isLargeScreen) 15.sp else 13.sp,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
@@ -1206,7 +1211,7 @@ private fun EditTagDialog(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = stringResource(R.string.profile_change_tag),
-                            color = Color.White,
+                            color = ThreeDsTextDark,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                         )
@@ -1243,7 +1248,7 @@ private fun EditTagDialog(
                     placeholder = {
                         Text(
                             stringResource(R.string.profile_tag_hint),
-                            color = Color.White.copy(alpha = 0.3f),
+                            color = ThreeDsTextGray,
                         )
                     },
                     singleLine = true,
@@ -1270,13 +1275,13 @@ private fun EditTagDialog(
                         ),
                     colors =
                         OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Color(0xFF141414),
-                            unfocusedContainerColor = Color(0xFF141414),
+                            focusedContainerColor = Color(0xFFEDE9DE),
+                            unfocusedContainerColor = Color(0xFFEDE9DE),
                             focusedBorderColor = LibraryNeonGreen,
-                            unfocusedBorderColor = Color.White.copy(alpha = 0.12f),
+                            unfocusedBorderColor = ThreeDsTextDark.copy(alpha = 0.12f),
                             cursorColor = LibraryNeonGreen,
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White,
+                            focusedTextColor = ThreeDsTextDark,
+                            unfocusedTextColor = ThreeDsTextDark,
                         ),
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -1305,7 +1310,7 @@ private fun EditTagDialog(
                     ) {
                         Text(
                             stringResource(android.R.string.cancel),
-                            color = Color.White.copy(alpha = 0.7f),
+                            color = ThreeDsTextGray,
                             fontWeight = FontWeight.Medium,
                         )
                     }
@@ -1318,8 +1323,8 @@ private fun EditTagDialog(
                             ButtonDefaults.buttonColors(
                                 containerColor = LibraryNeonGreen,
                                 contentColor = Color.Black,
-                                disabledContainerColor = Color.White.copy(alpha = 0.1f),
-                                disabledContentColor = Color.White.copy(alpha = 0.3f),
+                                disabledContainerColor = ThreeDsTextDark.copy(alpha = 0.08f),
+                                disabledContentColor = ThreeDsTextGray,
                             ),
                     ) {
                         Text("Save Tag", fontWeight = FontWeight.Bold)
@@ -1385,7 +1390,7 @@ private fun PhotoOptionsDialog(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = stringResource(R.string.profile_change_picture),
-                            color = Color.White,
+                            color = ThreeDsTextDark,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                         )
@@ -1425,7 +1430,7 @@ private fun PhotoOptionsDialog(
                                     ),
                                 shape = CircleShape,
                             )
-                            .background(Color(0xFF222222)),
+                            .background(Color(0xFFEDE9DE)),
                     contentAlignment = Alignment.Center,
                 ) {
                     if (currentPhotoUri != null) {

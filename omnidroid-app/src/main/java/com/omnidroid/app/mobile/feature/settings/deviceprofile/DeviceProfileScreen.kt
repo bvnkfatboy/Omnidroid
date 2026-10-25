@@ -57,6 +57,10 @@ import androidx.compose.ui.unit.sp
 import com.omnidroid.R
 import com.omnidroid.app.mobile.shared.compose.ui.HomeChromeBackground
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileWhite
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileBorder
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 import com.omnidroid.app.mobile.shared.controller.controllerFocusGlow
 import com.omnidroid.app.shared.deviceprofile.BenchmarkResult
 import com.omnidroid.app.shared.deviceprofile.CpuInfo
@@ -65,10 +69,10 @@ import com.omnidroid.app.shared.deviceprofile.DeviceProfile
 import com.omnidroid.app.shared.deviceprofile.GpuInfo
 import java.util.Locale
 
-private val PanelColor = Color(0xFF1A1A1A)
-private val PanelBorder = Color.White.copy(alpha = 0.08f)
-private val MutedText = Color.White.copy(alpha = 0.55f)
-private val ValueText = Color.White.copy(alpha = 0.92f)
+private val PanelColor = ThreeDsTileWhite
+private val PanelBorder = ThreeDsTileBorder
+private val MutedText = ThreeDsTextGray
+private val ValueText = ThreeDsTextDark
 private val PanelShape = RoundedCornerShape(12.dp)
 private val ChipShape = RoundedCornerShape(6.dp)
 
@@ -207,7 +211,7 @@ private fun DeviceHeader(
                     text = device.model.ifBlank { stringResource(R.string.settings_title_device_profile) },
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.White,
+                    color = ThreeDsTextDark,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -376,7 +380,7 @@ private fun BenchmarkPanel(
                 text = stringResource(R.string.settings_device_profile_category_benchmark),
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.White,
+                color = ThreeDsTextDark,
             )
         }
 
@@ -451,7 +455,7 @@ private fun ScoreTile(
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
-        color = Color.White.copy(alpha = 0.04f),
+        color = ThreeDsTextDark.copy(alpha = 0.06f),
         border = BorderStroke(1.dp, PanelBorder),
     ) {
         Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
@@ -464,7 +468,7 @@ private fun ScoreTile(
                 text = score,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-                color = if (score == "-") MutedText else Color.White,
+                color = if (score == "-") MutedText else ThreeDsTextDark,
                 modifier = Modifier.padding(top = 4.dp),
             )
             Text(
@@ -497,7 +501,7 @@ private fun SpecPanel(
                 text = title,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
-                color = Color.White,
+                color = ThreeDsTextDark,
             )
         }
         Spacer(modifier = Modifier.height(12.dp))
@@ -578,12 +582,12 @@ private fun MetaChip(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelMedium,
-        color = Color.White.copy(alpha = 0.85f),
+        color = ThreeDsTextDark,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         modifier =
             Modifier
-                .background(Color.White.copy(alpha = 0.07f), ChipShape)
+                .background(ThreeDsTextDark.copy(alpha = 0.07f), ChipShape)
                 .border(1.dp, PanelBorder, ChipShape)
                 .padding(horizontal = 10.dp, vertical = 5.dp),
     )
@@ -628,7 +632,7 @@ fun ExtendedBenchmarkProgressDialog(progress: Float) {
                     progress = progress,
                     modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
                     color = LibraryNeonGreen,
-                    trackColor = Color.White.copy(alpha = 0.12f),
+                    trackColor = ThreeDsTextDark.copy(alpha = 0.12f),
                 )
                 Text(
                     text =

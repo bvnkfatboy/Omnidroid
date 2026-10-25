@@ -89,6 +89,9 @@ import com.omnidroid.R
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
 import com.omnidroid.app.mobile.shared.compose.ui.LocalAdaptiveLayout
 import com.omnidroid.app.mobile.shared.compose.ui.SystemStatusIndicators
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileBorder
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileWhite
 import com.omnidroid.app.mobile.shared.compose.ui.rememberDisplayCutoutInsetsForTopBar
 import com.omnidroid.app.mobile.shared.controller.LocalControllerNavigation
 import com.omnidroid.app.mobile.shared.controller.controllerFocusGlow
@@ -168,7 +171,7 @@ fun LibraryTopBar(
         }
     }
 
-    CompositionLocalProvider(LocalContentColor provides Color.White) {
+    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
         if (portrait && !overlayMode && showBack) {
             PortraitDetailsTopBar(
                 modifier = modifier,
@@ -251,7 +254,7 @@ fun LibraryTopBar(
                                 .height(adaptiveSpec.topBarRowHeight)
                                 .background(
                                     Brush.verticalGradient(
-                                        0f to Color.Black,
+                                        0f to MaterialTheme.colorScheme.surface.copy(alpha = 0.92f),
                                         1f to Color.Transparent,
                                     ),
                                 )
@@ -348,7 +351,7 @@ fun LibraryTopBar(
                                                     MaterialTheme.typography.titleMedium.copy(
                                                         fontWeight = FontWeight.SemiBold,
                                                     ),
-                                                color = Color.White,
+                                                color = MaterialTheme.colorScheme.onSurface,
                                                 maxLines = 1,
                                                 overflow = TextOverflow.Ellipsis,
                                                 modifier = Modifier.padding(start = 14.dp),
@@ -476,7 +479,7 @@ private fun PortraitHomeTopBar(
                     .align(Alignment.TopCenter)
                     .background(
                         Brush.verticalGradient(
-                            0f to Color.Black,
+                            0f to MaterialTheme.colorScheme.surface.copy(alpha = 0.92f),
                             1f to Color.Transparent,
                         ),
                     ),
@@ -510,7 +513,7 @@ private fun PortraitHomeTopBar(
                             MaterialTheme.typography.titleSmall.copy(
                                 fontWeight = FontWeight.SemiBold,
                             ),
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier =
@@ -680,13 +683,13 @@ private fun LibrarySearchField(
                     },
                 ),
         shape = CircleShape,
-        color = Color(0xFF161616),
+        color = ThreeDsTileWhite,
         shadowElevation = 6.dp,
         tonalElevation = 0.dp,
         border =
             BorderStroke(
                 width = if (active) 2.dp else 1.dp,
-                color = if (active) LibraryNeonGreen else Color(0xFF2E2E2E),
+                color = if (active) LibraryNeonGreen else ThreeDsTileBorder,
             ),
     ) {
         Row(
@@ -701,7 +704,7 @@ private fun LibrarySearchField(
                 imageVector = Icons.Filled.Search,
                 contentDescription = stringResource(R.string.title_search),
                 modifier = Modifier.size(16.dp),
-                tint = Color.White.copy(alpha = 0.78f),
+                tint = ThreeDsTextGray,
             )
             BasicTextField(
                 value = query,
@@ -724,10 +727,10 @@ private fun LibrarySearchField(
                             onFocusChange(it.isFocused)
                         },
                 singleLine = true,
-                cursorBrush = SolidColor(Color.White),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
                 textStyle =
                     TextStyle(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 13.sp,
                     ),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
@@ -737,7 +740,7 @@ private fun LibrarySearchField(
                         if (query.isEmpty()) {
                             Text(
                                 text = stringResource(R.string.title_search),
-                                color = Color.White.copy(alpha = 0.42f),
+                                color = ThreeDsTextGray.copy(alpha = 0.8f),
                                 fontSize = 13.sp,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
@@ -751,7 +754,7 @@ private fun LibrarySearchField(
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = stringResource(R.string.cancel),
-                    tint = Color.White.copy(alpha = 0.78f),
+                    tint = ThreeDsTextGray,
                     modifier =
                         Modifier
                             .size(22.dp)
@@ -779,7 +782,7 @@ private fun OverlayTitle(
         Text(
             text = stringResource(titleId),
             style = MaterialTheme.typography.titleMedium,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 12.dp),
         )
     }
@@ -836,10 +839,10 @@ fun FloatingChromeButton(
         onClick = onClick,
         modifier = Modifier.size(buttonSize).controllerFocusGlow(CircleShape),
         shape = CircleShape,
-        color = Color(0xFF161616),
+        color = ThreeDsTileWhite,
         shadowElevation = 6.dp,
         tonalElevation = 0.dp,
-        border = BorderStroke(1.dp, Color(0xFF2E2E2E)),
+        border = BorderStroke(1.dp, ThreeDsTileBorder),
     ) {
         Row(
             modifier = Modifier.size(buttonSize),
@@ -886,8 +889,8 @@ fun SyncProgressBar(
 
     Surface(
         modifier = modifier,
-        color = Color(0xF2121212),
-        border = BorderStroke(0.5.dp, Color(0xFF262626)),
+        color = ThreeDsTileWhite.copy(alpha = 0.97f),
+        border = BorderStroke(0.5.dp, ThreeDsTileBorder),
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
@@ -919,7 +922,7 @@ fun SyncProgressBar(
                                 fontWeight = FontWeight.Medium,
                                 letterSpacing = 0.2.sp,
                             ),
-                        color = Color.White.copy(alpha = 0.92f),
+                        color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -949,7 +952,7 @@ fun SyncProgressBar(
                             .fillMaxWidth()
                             .height(2.dp),
                     color = LibraryNeonGreen,
-                    trackColor = Color(0x3338EF7D),
+                    trackColor = LibraryNeonGreen.copy(alpha = 0.2f),
                 )
             } else {
                 LinearProgressIndicator(
@@ -958,7 +961,7 @@ fun SyncProgressBar(
                             .fillMaxWidth()
                             .height(2.dp),
                     color = LibraryNeonGreen,
-                    trackColor = Color(0x3338EF7D),
+                    trackColor = LibraryNeonGreen.copy(alpha = 0.2f),
                 )
             }
         }

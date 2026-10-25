@@ -75,6 +75,9 @@ import com.omnidroid.app.mobile.feature.main.MainRoute
 import com.omnidroid.app.mobile.feature.main.navigateToRoute
 import com.omnidroid.app.mobile.shared.compose.ui.HomeChromeBackground
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileWhite
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 import com.omnidroid.app.mobile.shared.compose.ui.avoidDisplayCutout
 import com.omnidroid.app.mobile.shared.controller.LocalControllerNavigation
 import com.omnidroid.app.mobile.shared.controller.controllerFocusGlow
@@ -97,7 +100,7 @@ import kotlinx.coroutines.yield
 private val SettingsSidebarWidth = 220.dp
 private val SettingsCardHeight = 96.dp
 private val SettingsCardShape = RoundedCornerShape(8.dp)
-private val SettingsCardColor = Color(0xFF242424)
+private val SettingsCardColor = ThreeDsTileWhite
 
 private enum class SettingsSection(
     @StringRes val titleId: Int,
@@ -307,7 +310,7 @@ private fun SettingsTopMenu(
                             .focusRequester(focusRequesters.getValue(item))
                             .onFocusChanged { if (it.isFocused) onFocused(item) },
                     shape = RectangleShape,
-                    color = if (isSelected) Color.White.copy(alpha = 0.08f) else Color.Transparent,
+                    color = if (isSelected) ThreeDsTextDark.copy(alpha = 0.08f) else Color.Transparent,
                 ) {
                     Box(
                         modifier =
@@ -320,7 +323,7 @@ private fun SettingsTopMenu(
                             text = stringResource(item.titleId),
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                            color = if (isSelected) Color.White else Color.White.copy(alpha = 0.72f),
+                            color = if (isSelected) ThreeDsTextDark else ThreeDsTextGray,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -341,7 +344,7 @@ private fun SettingsTopMenu(
                 Modifier
                     .fillMaxWidth()
                     .height(1.dp)
-                    .background(Color.White.copy(alpha = 0.08f)),
+                    .background(ThreeDsTextDark.copy(alpha = 0.08f)),
         )
     }
 }
@@ -372,7 +375,7 @@ private fun SettingsSidebar(
                         .focusRequester(focusRequesters.getValue(item))
                         .onFocusChanged { if (it.isFocused) onFocused(item) },
                 shape = RectangleShape,
-                color = if (isSelected) Color.White.copy(alpha = 0.08f) else Color.Transparent,
+                color = if (isSelected) ThreeDsTextDark.copy(alpha = 0.08f) else Color.Transparent,
             ) {
                 Row(
                     modifier = Modifier.height(48.dp),
@@ -389,7 +392,7 @@ private fun SettingsSidebar(
                         text = stringResource(item.titleId),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                        color = if (isSelected) Color.White else Color.White.copy(alpha = 0.72f),
+                        color = if (isSelected) ThreeDsTextDark else ThreeDsTextGray,
                         modifier = Modifier.padding(start = 16.dp, end = 12.dp),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -544,13 +547,13 @@ private fun SettingsHubCard(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = Color.White,
+                tint = ThreeDsTextDark,
                 modifier = Modifier.size(28.dp),
             )
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
-                color = Color.White,
+                color = ThreeDsTextDark,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(start = 16.dp),

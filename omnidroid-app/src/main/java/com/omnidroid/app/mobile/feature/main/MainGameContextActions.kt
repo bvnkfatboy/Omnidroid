@@ -81,6 +81,9 @@ import com.omnidroid.app.mobile.shared.compose.ui.HomeChromeBackground
 import com.omnidroid.app.mobile.shared.compose.ui.OmnidroidGameTexts
 import com.omnidroid.app.mobile.shared.compose.ui.OmnidroidSmallGameImage
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileBorder
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 import com.omnidroid.app.mobile.shared.controller.controllerFocusGlow
 import com.omnidroid.app.shared.covers.CoverUtils
 import com.omnidroid.lib.library.GameSystem
@@ -89,8 +92,8 @@ import com.omnidroid.lib.library.db.entity.Game
 import com.omnidroid.lib.savesync.GameCloudSyncOverride
 
 private val GameSettingsOverlayWidth = 380.dp
-private val PanelMutedWhite = Color.White.copy(alpha = 0.72f)
-private val PanelDivider = Color.White.copy(alpha = 0.08f)
+private val PanelMutedWhite = ThreeDsTextGray
+private val PanelDivider = ThreeDsTileBorder
 
 @Composable
 fun MainGameContextActions(
@@ -284,11 +287,11 @@ private fun GameSettingsPanel(
                 .width(GameSettingsOverlayWidth),
         shape = RectangleShape,
         color = HomeChromeBackground,
-        contentColor = Color.White,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         tonalElevation = 0.dp,
         shadowElevation = 0.dp,
     ) {
-        CompositionLocalProvider(LocalContentColor provides Color.White) {
+        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
             Row(modifier = Modifier.fillMaxSize()) {
                 Box(
                     modifier =
@@ -494,7 +497,7 @@ private fun GameSettingsHeader(onClose: () -> Unit) {
                     .controllerFocusGlow(CircleShape),
             shape = CircleShape,
             color = Color.Transparent,
-            contentColor = Color.White,
+            contentColor = MaterialTheme.colorScheme.onSurface,
         ) {
             Box(contentAlignment = Alignment.Center) {
                 Icon(
@@ -509,7 +512,7 @@ private fun GameSettingsHeader(onClose: () -> Unit) {
                 MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 8.dp),
             maxLines = 1,
         )
@@ -526,7 +529,7 @@ private fun SectionLabel(text: String) {
     )
 }
 
-private val SpeedSelectorTrack = Color.White.copy(alpha = 0.08f)
+private val SpeedSelectorTrack = ThreeDsTextDark.copy(alpha = 0.08f)
 private val SpeedSelectorHeight = 40.dp
 private val SpeedSelectorShape = RoundedCornerShape(10.dp)
 
@@ -561,7 +564,7 @@ private fun FastForwardSpeedSelector(
                         .controllerFocusGlow(RoundedCornerShape(8.dp)),
                 shape = RoundedCornerShape(8.dp),
                 color = if (isSelected) LibraryNeonGreen else Color.Transparent,
-                contentColor = if (isSelected) Color.Black else Color.White,
+                contentColor = if (isSelected) Color.Black else ThreeDsTextDark,
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -632,12 +635,12 @@ private fun ContextActionEntry(
             modifier = Modifier.padding(start = 16.dp),
             imageVector = icon,
             contentDescription = label,
-            tint = Color.White,
+            tint = ThreeDsTextDark,
         )
         Text(
             modifier = Modifier.padding(start = 16.dp),
             text = label,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurface,
         )
     }
 }
@@ -666,6 +669,6 @@ private fun ChoiceRow(
                     unselectedColor = PanelMutedWhite,
                 ),
         )
-        Text(text = label, color = Color.White)
+        Text(text = label, color = ThreeDsTextDark)
     }
 }

@@ -495,8 +495,11 @@
     <string name="library_zoom_out">Zoom out</string>
     <string name="library_view_grid">Grid view</string>
     <string name="library_view_list">List view</string>
+    <string name="library_view_home">3DS home view</string>
     <string name="library_view_portrait">Portrait view</string>
     <string name="library_view_landscape">Landscape view</string>
+    <string name="library_carousel_previous">Previous game</string>
+    <string name="library_carousel_next">Next game</string>
     <string name="controller_hint_install">Install</string>
     <string name="console_not_added">Not added yet</string>
 

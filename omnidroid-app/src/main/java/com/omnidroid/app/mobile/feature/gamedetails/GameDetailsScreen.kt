@@ -82,6 +82,9 @@ import com.omnidroid.R
 import com.omnidroid.app.mobile.feature.library.LibraryTopBarRowHeight
 import com.omnidroid.app.mobile.shared.compose.ui.HomeChromeBackground
 import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTileWhite
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextGray
+import com.omnidroid.app.mobile.shared.compose.ui.ThreeDsTextDark
 import com.omnidroid.app.mobile.shared.controller.LocalControllerNavigation
 import com.omnidroid.app.mobile.shared.controller.controllerFocusGlow
 import com.omnidroid.app.shared.covers.CoverUtils
@@ -409,7 +412,7 @@ private fun GameCoverOrTrailer(
                         .then(coverSharedModifier),
                 shape = coverShape,
                 tonalElevation = 6.dp,
-                color = Color(0xFF161616),
+                color = ThreeDsTileWhite,
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -468,7 +471,7 @@ private fun GameCoverOrTrailer(
             Icon(
                 imageVector = Icons.Outlined.Edit,
                 contentDescription = stringResource(R.string.game_context_menu_change_thumbnail),
-                tint = Color.White.copy(alpha = 0.55f),
+                tint = ThreeDsTextGray,
                 modifier =
                     Modifier
                         .align(Alignment.TopEnd)
@@ -550,7 +553,7 @@ private fun GameTrailerPlayer(
 
 private val DetailsActionCorner = RoundedCornerShape(4.dp)
 private val DetailsActionHeight = 52.dp
-private val DetailsActionFill = Color(0xFF161616)
+private val DetailsActionFill = ThreeDsTileWhite
 
 @Composable
 private fun GameDetailsInfo(
@@ -593,7 +596,7 @@ private fun GameDetailsInfo(
                 Icon(
                     imageVector = Icons.Outlined.Edit,
                     contentDescription = stringResource(R.string.game_context_menu_change_name),
-                    tint = Color.White.copy(alpha = 0.55f),
+                    tint = ThreeDsTextGray,
                     modifier = Modifier.size(18.dp),
                 )
             }
@@ -734,7 +737,7 @@ private fun GameDetailsActions(
                 Icon(
                     imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                     contentDescription = stringResource(R.string.favorites),
-                    tint = if (isFavorite) LibraryNeonGreen else Color.White,
+                    tint = if (isFavorite) LibraryNeonGreen else ThreeDsTextDark,
                     modifier = Modifier.size(26.dp),
                 )
             }
@@ -752,7 +755,7 @@ private fun GameDetailsActions(
                 Icon(
                     imageVector = Icons.Outlined.Settings,
                     contentDescription = stringResource(R.string.game_settings),
-                    tint = Color.White,
+                    tint = ThreeDsTextDark,
                     modifier = Modifier.size(26.dp),
                 )
             }

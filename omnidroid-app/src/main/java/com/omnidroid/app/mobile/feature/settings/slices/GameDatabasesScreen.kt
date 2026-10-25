@@ -52,6 +52,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.omnidroid.app.mobile.shared.compose.ui.LibraryNeonGreen
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -291,7 +292,7 @@ fun GameDatabasesScreen(
                                     imageVector = Icons.Outlined.CheckCircle,
                                     contentDescription = null,
                                     tint = if (installedCount == totalCount && totalCount > 0) {
-                                        Color(0xFF4CAF50)
+                                        LibraryNeonGreen
                                     } else {
                                         MaterialTheme.colorScheme.primary
                                     },
@@ -504,7 +505,7 @@ private fun ConsoleDatabaseCard(
                             Box(
                                 modifier = Modifier
                                     .size(6.dp)
-                                    .background(androidx.compose.ui.graphics.Color(0xFF4CAF50), CircleShape),
+                                    .background(LibraryNeonGreen, CircleShape),
                             )
                             Text(
                                 text = stringResource(R.string.game_databases_games_count, installed.rows) +
